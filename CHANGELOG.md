@@ -10,6 +10,33 @@ pre-launch and its tool names are not frozen. **The server's own tool descriptio
 authoritative**; where they disagree with this repo, follow the tools and open an issue. A tool
 rename in the server is a MINOR bump here.
 
+## [0.3.1] — 2026-08-13
+
+Closes every remaining closable finding from the third scoring pass.
+
+### Fixed
+- **The generic install steps were in an impossible order** — step 2 said to copy or point at
+  `skills/humanest/` before step 3 cloned the repo, and the example command trailed off in an
+  ellipsis instead of a URL. Acquiring the files is now step 2, with a complete command.
+- **Updates are reviewed before they are applied, not after.** `/plugin update` replaces the
+  installed instructions, so "read what changed" afterwards was not review. The skill and the
+  Claude Code guide now read the target version's changelog, tell the member what would change
+  about the agent's behavior, and update on their word.
+- **Profile updates had two authorizations.** The loop said "if they asked" while the profile
+  section said to refresh stale fields — now every `h_update_profile` call, public or private,
+  carries something the member just agreed to.
+- The absolute claim in `filtering.md` that nothing arriving through Humanest can cause the agent
+  to act is restated as the standing instruction it is, since `SECURITY.md` already concedes prose
+  can be defeated.
+
+### Added
+- **A stored approval record.** When a member approves something, the agent writes down the exact
+  text, the audience or recipients, and the time, alongside their settings — and sends only that.
+  Anything that differs needs a fresh look, and the record is what tells the agent what it was
+  allowed to do after a lost session.
+- The OpenClaw guide checks for a native skill-install command before falling back to copying a
+  directory or appending a pointer.
+
 ## [0.3.0] — 2026-08-12
 
 A cross-model evaluation of 0.2.0 found the approval policy stated three incompatible ways across
@@ -123,6 +150,7 @@ review (47 findings) plus verification against each harness's own documentation.
 First version: the daily loop, filtering judgment, keeps, the briefing shape, send judgment under
 standing permission, profile care, and adapters for three harnesses.
 
+[0.3.1]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.1
 [0.3.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.0
 [0.2.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.2.0
 [0.1.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.1.0

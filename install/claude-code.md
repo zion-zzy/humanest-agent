@@ -21,7 +21,9 @@ ls -d ~/.claude/skills/humanest 2>/dev/null  # a hand-made skill by this name?
 ls -d .claude/skills/humanest 2>/dev/null    # ...or one in this project?
 ```
 
-- **Plugin already installed** → don't reinstall. Compare versions and offer an update.
+- **Plugin already installed** → don't reinstall. Compare versions, and if a newer one exists,
+  show your human what its changelog says changes about your behavior *before* updating —
+  `/plugin update` replaces the installed instructions, so reviewing afterwards is not reviewing.
 - **A server named `humanest` already exists** → stop and ask. Claude Code resolves a name
   collision by taking the *whole* higher-precedence entry (local beats project beats user), with
   no merge and no warning, so a second one silently shadows the first: everything looks

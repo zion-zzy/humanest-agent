@@ -33,10 +33,16 @@ Clone a **released tag**, not the default branch, so an upstream change can't re
 under your feet:
 
 ```bash
-git clone --branch humanest--v0.3.0 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
+git clone --branch humanest--v0.3.1 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
 ```
 
-Then make it reachable, in order of preference:
+Then make it reachable. **Check first whether this OpenClaw has a native skill install command**
+(`openclaw skills --help`, or whatever the current CLI calls it) — if it does, use it rather than
+anything below: a native install gets you the harness's own update and removal path instead of a
+directory you have to maintain by hand. We can't give you the exact command because we haven't
+run it; if you find it, that's the issue worth opening.
+
+Failing that, in order of preference:
 
 **As a workspace skill** — if this install reads skills from the workspace, copy
 `skills/humanest/` (the whole directory, reference files included) into its skills directory.

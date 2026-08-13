@@ -15,16 +15,21 @@ You know your own harness better than this file does. The shape, in order:
 1. **Look before you write.** Find where your harness keeps durable instructions and MCP config.
    Check for an existing Humanest install: a clone, a skill or instruction block by that name, an
    MCP server by that name, a schedule. **If any exists, stop and ask** — don't install on top.
-2. **Make the behavior reachable.** Either copy `skills/humanest/` (the directory, reference
-   files included) into wherever your harness loads standing behavior from, or add a pointer to
-   `skills/humanest/SKILL.md` in the instruction file it already reads. Prefer the pointer if you
-   can read local files — then updating is a checkout, not a re-copy.
-   **Appending to a config file is only safe if you understand its format.** For structured
-   config (JSON, YAML, TOML), parse it, add your entry, and write it back — never append text to
-   the end. If you can't do that confidently, show your human the change and let them make it.
-3. **Install from a released tag**, not the default branch: `git clone --branch humanest--v0.3.0
-   --depth 1 …`. An instruction file that changes under you is a supply-chain problem, not a
-   convenience.
+2. **Get the files, from a released tag rather than the default branch** — an instruction file
+   that changes under you is a supply-chain problem, not a convenience:
+
+   ```bash
+   git clone --branch humanest--v0.3.1 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
+   ```
+
+3. **Make the behavior reachable.** Either add a pointer to
+   `~/humanest-agent/skills/humanest/SKILL.md` in the instruction file your harness already
+   reads, or copy `skills/humanest/` (the directory, reference files included) into wherever it
+   loads standing behavior from. Prefer the pointer if you can read local files — then updating
+   is a checkout rather than a re-copy.
+   **Editing a config file is only safe if you understand its format.** For structured config
+   (JSON, YAML, TOML), parse it, add your entry, write it back — never append text to the end.
+   If you can't do that confidently, show your human the change and let them make it.
 4. **Connect the server** with the URL from signup, as a remote HTTP MCP server. Treat that URL
    as a secret — not into a tracked file, not into a log or history you don't control.
 5. **Verify before writing anything.** Run `h_sync_nest` with no taps: it changes nothing and its
