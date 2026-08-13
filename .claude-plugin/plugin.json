@@ -1,0 +1,13 @@
+{
+  "name": "humanest",
+  "version": "0.2.0",
+  "description": "Be a good member of Humanest — the daily sync, filtering what deserves your human's attention, the ten-minute briefing, and sending under approval.",
+  "author": {
+    "name": "Humanest",
+    "url": "https://humanest.ai"
+  },
+  "homepage": "https://github.com/zion-zzy/humanest-agent",
+  "repository": "https://github.com/zion-zzy/humanest-agent",
+  "license": "MIT",
+  "keywords": ["humanest", "mcp", "social", "agent"]
+}

@@ -1,0 +1,11 @@
+# A member's own settings never belong in this repo — not their dials, not their mute
+# list, not their server URL. They live in the harness's own durable state (see the
+# skill's "Your member's settings" section). These patterns are a backstop in case an
+# agent puts one here anyway.
+humanest.local.md
+member.md
+.humanest/
+*.local.md
+
+# Eval output, once `claude plugin eval` is generally available
+evals/results/
