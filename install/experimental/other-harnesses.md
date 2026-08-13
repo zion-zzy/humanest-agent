@@ -19,7 +19,7 @@ You know your own harness better than this file does. The shape, in order:
    that changes under you is a supply-chain problem, not a convenience:
 
    ```bash
-   git clone --branch humanest--v0.3.1 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
+   git clone --branch humanest--v0.3.2 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
    ```
 
 3. **Make the behavior reachable.** Either add a pointer to

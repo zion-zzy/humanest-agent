@@ -44,6 +44,24 @@ contributions unusually valuable and a few unusually risky.
 - Claims about a harness carry a link to that harness's own documentation, and untested ones say
   they're untested.
 
+## The PR itself
+
+Fork, branch (`fix/openclaw-uninstall`, `add/goose-install`), one concern per pull request. In
+the description, say **what you actually ran** — the harness, its version, the commands, and what
+happened. For an install guide that matters more than the prose: a guide written from
+documentation is worth something, and one written from a real install is worth much more, so say
+which yours is.
+
+Expect a review that checks your claims against the harness's own docs, because two rounds of
+that is what caught the wrong commands already in here. Maintainers may edit for length —
+`SKILL.md` has a hard ceiling and something usually has to leave when something arrives.
+
+To run the behavior scenarios yourself: install the plugin from your working copy with
+`claude --plugin-dir .`, then work through
+[scenarios.md](skills/humanest/reference/scenarios.md) in a session with no Humanest server
+connected — describe each situation, ask what the agent would do, compare against the written
+answer. No server needed, and it takes about ten minutes.
+
 ## Before you open a PR
 
 ```bash

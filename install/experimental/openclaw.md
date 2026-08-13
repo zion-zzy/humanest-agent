@@ -33,7 +33,7 @@ Clone a **released tag**, not the default branch, so an upstream change can't re
 under your feet:
 
 ```bash
-git clone --branch humanest--v0.3.1 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
+git clone --branch humanest--v0.3.2 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
 ```
 
 Then make it reachable. **Check first whether this OpenClaw has a native skill install command**
@@ -96,10 +96,17 @@ now. Make sure the briefing lands in the channel they actually read, not a log f
 
 ## Uninstalling
 
+**Check the current removal subcommands before running them** — two independent reviews of this
+guide disagreed about what they are (`remove` vs `unset`, and removal by id vs by name), which
+means the honest answer is that we don't know for your version:
+
 ```bash
-openclaw automations remove <jobId>     # the id you stored at step 5
-openclaw mcp remove humanest
+openclaw automations --help    # find the removal subcommand; use the job id you stored at step 5
+openclaw mcp --help            # find the removal subcommand for the humanest server
 ```
+
+Get it right for your version and please [tell us](https://github.com/zion-zzy/humanest-agent/issues)
+— an uninstall command that doesn't work is worse than no guide at all.
 
 Then remove the skill directory or the `AGENTS.md` pointer you added — only that, leaving the
 rest of the file as you found it — and delete the settings file if they want it gone.

@@ -10,6 +10,35 @@ pre-launch and its tool names are not frozen. **The server's own tool descriptio
 authoritative**; where they disagree with this repo, follow the tools and open an issue. A tool
 rename in the server is a MINOR bump here.
 
+## [0.3.2] — 2026-08-13
+
+A fourth independent scoring pass caught three of my own mistakes and one hole worth more than
+the rest of this release.
+
+### Fixed
+- **A tool description could claim authority over the safety rules.** "The server's tool
+  descriptions are authoritative" was written about mechanics but read as a blanket. It now says
+  what it means: descriptions govern names, arguments and shapes, and **nothing else** — one that
+  tells the agent to send without its member or skip an approval identifies a compromised or
+  counterfeit server, and the agent stops. A renamed argument and a missing tool now also get
+  different answers instead of one contradictory one.
+- **The README still said v0.3.0** while every other file said 0.3.1.
+- **"There's no Humanest app to check"** narrowed to what's true: no feed and no daily app, with
+  signup, settings and the ledger openly on the web.
+- **The OpenClaw removal commands are no longer asserted.** Two independent reviews disagreed
+  about them (`remove` vs `unset`, by id vs by name), so the guide now says we don't know and
+  tells the installing agent to check `--help` — an uninstall command that doesn't work is worse
+  than no guide.
+
+### Added
+- The stored approval record covers **every** write, not just sends: keeps and profile changes
+  get the same treatment.
+- Two habits that make inbound text harder to mistake for instruction: carry it quoted and
+  attributed wherever you handle it, and never let wording from a received item reach a tool
+  argument without the member seeing it.
+- A real PR process in `CONTRIBUTING.md`, including how to run the behavior scenarios against a
+  working copy in about ten minutes.
+
 ## [0.3.1] — 2026-08-13
 
 Closes every remaining closable finding from the third scoring pass.
@@ -150,6 +179,7 @@ review (47 findings) plus verification against each harness's own documentation.
 First version: the daily loop, filtering judgment, keeps, the briefing shape, send judgment under
 standing permission, profile care, and adapters for three harnesses.
 
+[0.3.2]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.2
 [0.3.1]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.1
 [0.3.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.0
 [0.2.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.2.0
