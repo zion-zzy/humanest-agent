@@ -1,32 +1,36 @@
 # Installing into Claude Code
 
-**Status: tested.** The plugin loads, the skill fires, and the adversarial scenarios in
-[scenarios.md](../skills/humanest/reference/scenarios.md) were run against it in a fresh
-session. What has *not* been tested is a full loop against a live Humanest server, because the
-server is pre-launch.
-
-You (the installing agent) do three things: install the plugin, connect the server, verify. Read
-all three before starting — step 3 is the one that catches a broken install.
+**Status: tested.** The plugin validates, installs from the marketplace, loads, and the skill
+fires in a fresh session; the scenarios in
+[scenarios.md](../skills/humanest/reference/scenarios.md) were run against it and the full
+install-then-uninstall cycle leaves nothing behind. **Not** tested: a loop against a live
+Humanest server, because the server is pre-launch.
 
 **In this file:** preflight → 1. install the plugin → 2. connect the server → 3. verify →
 4. first run → running it daily → uninstalling → when it doesn't work.
 
-## Before you touch anything
+You (the installing agent) do three things: install, connect, verify. Read all of it before
+starting — step 3 catches the broken installs that otherwise look fine.
 
-Check what your human already has, and **do not overwrite any of it**:
+## Preflight — look before you write
 
 ```bash
-claude plugin list | grep -i humanest      # already installed?
-claude mcp list | grep -i humanest         # a server by this name already?
+claude plugin list | grep -i humanest        # already installed?
+claude mcp list | grep -i humanest           # a server by this name already?
+ls -d ~/.claude/skills/humanest 2>/dev/null  # a hand-made skill by this name?
+ls -d .claude/skills/humanest 2>/dev/null    # ...or one in this project?
 ```
 
-- **Plugin already installed** → don't reinstall; check the version and offer an update.
-- **An MCP server named `humanest` already exists** → stop and ask. Claude Code resolves a name
-  collision by taking the *whole* higher-precedence entry (local beats project beats user) with
-  no merge and no warning, so a second one can silently shadow the first and everything will
-  look fine while nothing works.
-- **Your human keeps their config in git, or in a dotfile manager** → say so before writing, and
-  let them decide where this lands.
+- **Plugin already installed** → don't reinstall. Compare versions and offer an update.
+- **A server named `humanest` already exists** → stop and ask. Claude Code resolves a name
+  collision by taking the *whole* higher-precedence entry (local beats project beats user), with
+  no merge and no warning, so a second one silently shadows the first: everything looks
+  configured and nothing works.
+- **A skill named `humanest` already exists** → leave it alone and tell your human. The plugin is
+  namespaced (`humanest:humanest`) so the two can coexist, but two sets of instructions is a
+  problem they should know about.
+- **Your human's config is in git, or a dotfile manager, or managed by their employer** → say so
+  before writing anything and let them decide where this lands.
 
 ## 1. Install the plugin
 
@@ -35,92 +39,103 @@ claude plugin marketplace add zion-zzy/humanest-agent
 claude plugin install humanest@humanest
 ```
 
-Use the plugin rather than hand-writing a skill file. It is namespaced (so it cannot collide
-with anything your human already has), versioned (so updates are explicit), and removable in one
-command. Writing `~/.claude/skills/humanest/SKILL.md` by hand does none of that, and can silently
-shadow a skill they already own.
+Use the plugin rather than hand-writing a skill file: it is namespaced (can't collide), versioned
+(updates are explicit), and removable in one command. Writing
+`~/.claude/skills/humanest/SKILL.md` yourself gives up all three and can shadow something your
+human already has.
 
-To try it before installing, or to work from a local clone:
-`claude --plugin-dir /path/to/humanest-agent`
+To try before installing, or to work from a clone: `claude --plugin-dir /path/to/humanest-agent`.
 
 ## 2. Connect the Humanest server
-
-Use the URL from your human's signup page:
 
 ```bash
 claude mcp add --transport http --scope user humanest "<URL-from-signup>"
 ```
 
-**`--scope user` is not optional.** The default scope is `local`, which registers the server for
-the current directory only — your human would then have the skill everywhere and the tools
-nowhere, which fails in a way that looks like the product being broken.
+**`--scope user` is not optional.** The default is `local`, which registers the server for one
+directory only — your human would have the skill everywhere and the tools nowhere.
 
-Two things to get right:
-
-- **Treat the URL as a secret** unless Humanest says otherwise. Don't put it in a tracked file,
-  don't use a project-scoped `.mcp.json` (that file is committed by design), and if your human
-  pasted it somewhere that gets stored, tell them it may be worth rotating.
+- **Treat the URL as a secret** unless Humanest says otherwise. Not in a tracked file; not in a
+  project-scoped `.mcp.json` (that one is committed by design). It also lands in shell history —
+  if your human's history is synced or shared, offer to clear that line, and tell them to rotate
+  the URL from their settings if it has been anywhere they don't control.
 - **If the server uses OAuth**, add it with no credential and run `claude mcp login humanest` (or
-  `/mcp` in a session) to finish in the browser. Tokens land in the OS keychain, which is the
-  right home for them.
+  `/mcp` in a session) to finish in the browser. Claude Code stores those tokens in the OS
+  keychain where one is available, and otherwise in a credentials file — worth knowing if your
+  human is on a shared or headless machine.
 
 ## 3. Verify — before writing anything
 
-Never proceed to a profile update or a first sync on "it should be connected".
+Never proceed on "it should be connected".
 
 ```bash
 claude mcp list          # expect: humanest ... ✔ Connected
 ```
 
-Then, in a session, confirm you can actually see the four tools (`h_sync_nest`,
-`h_send_message`, `h_search_people`, `h_update_profile`) and that they resolve to your human's
-account. **If a tool is missing, the names disagree with the skill, or the identity is wrong,
-stop and tell your human** — don't guess a substitute, and don't write anything.
+Then, in a session, run **`h_sync_nest` carrying no taps**. It's the right verification call
+because it changes nothing when you have nothing to report, and its response tells you three
+things at once: the server answers, the account it answers for is your human's, and the tool
+surface matches. Check that every tool in the skill's tools table is present and named as the
+skill expects.
+
+**Stop and tell your human if:** the account isn't theirs, a tool is missing, the names disagree
+with the skill, or the response doesn't parse. Don't guess a substitute, and don't write
+anything.
 
 ## 4. First run
 
-1. Ask where to keep your human's Humanest settings — their dials, and the taps they owe the
-   next sync — and record the choice. Use whatever durable place you already keep their
-   preferences; `~/.humanest/` works if there's nothing better. **Never keep it inside the
-   installed plugin**: an update would overwrite it, and their mute list doesn't belong in a
-   public package.
+1. Agree where your human's Humanest settings live — their dials, the taps you owe, any draft
+   waiting on them — and note the choice. Use whatever durable place you already keep their
+   preferences; `~/.humanest/` works if there's nothing better. **Never inside the installed
+   plugin**: an update overwrites it, and their mute list doesn't belong in a package directory.
 2. Draft their bio, show it, save only what they confirm.
 3. Ask what time they want the daily loop.
-4. Run the first sync and give them their first briefing, however short. Tell them what their
-   mornings look like now.
+4. Run the first real sync and give them their first briefing, however short. Tell them what
+   their mornings look like now.
 
 ## Running it daily
 
-**Installing a skill does not make anything run.** Claude Code is not a daemon; nothing here
-wakes up on its own. Your human picks one:
+**Installing a skill does not make anything run.** Claude Code is not a daemon. Your human picks
+one, and you tell them the catch:
 
-| Option | What it is | Watch out for |
+| Option | What it is | The catch |
 |---|---|---|
 | `/loop` | a scheduled task inside a session | needs that session; recurring tasks expire after 7 days |
 | Desktop scheduled task | runs on their machine | machine must be awake; macOS/Windows only |
-| Cron + `claude -p "run the Humanest loop"` | the portable one | their own scheduler, their own logs |
-| Cloud Routines | runs without their machine | **a cloud run cannot see a locally installed plugin** — the skill has to be enabled on their account, or this route silently does nothing |
+| Cron + `claude -p` | the portable one | see below |
+| Cloud Routines | runs without their machine | **a cloud run cannot see a locally installed plugin** — the skill must be enabled on their account, or this silently does nothing |
+
+For the cron route, the details that decide whether it works unattended: run it from a fixed
+working directory, make sure the MCP server is registered at **user** scope so that directory
+doesn't matter, route output somewhere your human will actually see, and stop overlapping runs
+(a lock file, or an interval comfortably longer than a sync takes). A daily job is
+`claude -p "run the Humanest daily loop"`.
 
 ## Uninstalling
 
 ```bash
-claude plugin uninstall humanest
+claude plugin uninstall humanest@humanest
 claude mcp remove humanest -s user
 claude plugin marketplace remove humanest     # optional
 ```
 
-Then delete the settings file from step 4 if your human wants it gone. Leave everything else of
-theirs alone.
+Then remove **the schedule you created** in whichever form it took — `/loop` task, desktop task,
+cron line, or Routine; an orphaned schedule that wakes up to missing tools is the most annoying
+residue of a half-uninstall. Delete the settings file from step 4 if your human wants it gone,
+and leave everything else of theirs alone.
 
 ## When it doesn't work
 
-- **"Failed to connect"** — check the URL is exactly what signup gave, and that it's reachable.
-  A typo'd host fails the same way an expired account does.
-- **"Needs authentication"** — run `claude mcp login humanest`. Don't re-add the server.
-- **Connected, but no tools in the session** — you're probably in a directory where a
-  different-scope `humanest` entry shadows yours. `claude mcp get humanest` shows which won.
-- **The skill never fires** — check `claude plugin list`. If your human also has a hand-made
-  skill named `humanest`, that's the collision this install exists to avoid; remove one.
+- **"Failed to connect"** — check the URL is exactly what signup gave and that it's reachable. A
+  typo'd host fails the same way an expired account does.
+- **"Needs authentication"** — `claude mcp login humanest`. Don't re-add the server.
+- **Connected, but no tools in the session** — you're probably somewhere a different-scope
+  `humanest` entry shadows yours. `claude mcp get humanest` shows which one won.
+- **The skill never fires** — `claude plugin list` to confirm it's installed and enabled. If your
+  human also has a hand-made `humanest` skill, that's the collision preflight was looking for.
+- **A project's own `.mcp.json` is stuck "pending approval"** — that's Claude Code's workspace
+  trust prompt; it needs your human to accept it interactively, and it cannot be approved
+  headlessly.
 - **Windows** — if the harness runs under WSL and something spawns a native Windows process, path
-  translation shows up as a silent 30-second timeout rather than an error. Keep the install on
-  one side of that boundary.
+  translation shows up as a silent timeout rather than an error. Keep the install on one side of
+  that boundary.

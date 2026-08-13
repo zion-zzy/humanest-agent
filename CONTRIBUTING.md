@@ -25,8 +25,12 @@ contributions unusually valuable and a few unusually risky.
 - **Add a rule without pairing it.** A bare "don't do X" measurably degrades behavior; say what
   to do instead in the same breath.
 - **Explain things the model already knows.** Every sentence should change what an agent does.
-- **Introduce a second way to say something.** If a rule lives in `SKILL.md`, reference files
-  point at it rather than restating it — duplicated guidance drifts, and then two files disagree.
+- **Introduce a second way to say something.** `SKILL.md` is the only normative source; every
+  other file points at it rather than restating it. This is not a style rule — v0.2 stated the
+  approval policy in four files and they had already drifted into contradiction by the time
+  anyone read them together. Where a repeat genuinely earns its place (the README has to describe
+  the deal; `SECURITY.md` has to state the threat), it must be checked against `SKILL.md` in the
+  same commit that changes either.
 
 ## House rules
 
@@ -45,6 +49,12 @@ contributions unusually valuable and a few unusually risky.
 ```bash
 claude plugin validate . --strict     # manifests must pass
 wc -l skills/humanest/SKILL.md        # must be under 150
+
+# Imperative load: frontier models track roughly 150-200 instructions before
+# compliance degrades, and the harness itself already spends some of that budget.
+# Keep the canonical file's count well inside it — under 100 is the working bar.
+grep -cE '^\s*[-*0-9.]*\s*\*\*?[A-Z][a-z]+\b|(^|\. )(Never|Always|Don.t|Do not|Keep|Show|Send|Stop|Report|Use|Ask|Tell|Draft|Judge|Sync|Sleep|Read|File|Confirm|Propose|Pick|Treat) ' \
+  skills/humanest/SKILL.md
 ```
 
 Then re-read your diff as an agent following it literally, with no context from this

@@ -5,13 +5,14 @@ for it.
 
 ## The bound
 
-**Ten minutes of reading, hard.** In practice that's about 800 words, five posts, and every
-message that cleared the filter. When more clears than fits, cut to the best and say what you
-cut: "three more posts cleared the bar; say the word and I'll show them." Never quietly drop
-the tail, and never let a big day produce a long briefing.
+**Ten minutes is the whole transaction — reading it, deciding, and answering you.** So the
+briefing itself is short: about 600 words, five posts at most, plus every message that cleared
+the filter. The rest of the ten minutes belongs to your member thinking, not to your prose.
 
-If your member reads on a phone, or wants it spoken, shorten further — the bound is their
-attention, not your word count.
+When more clears than fits, cut to the best and say what you cut: "three more posts cleared the
+bar; say the word and I'll show them." Never drop the tail quietly, and never let a big day
+produce a long briefing. If your member reads on a phone, or wants it spoken, go shorter still —
+the bound is their attention, not your word count.
 
 ## The order
 

@@ -10,6 +10,57 @@ pre-launch and its tool names are not frozen. **The server's own tool descriptio
 authoritative**; where they disagree with this repo, follow the tools and open an issue. A tool
 rename in the server is a MINOR bump here.
 
+## [0.3.0] — 2026-08-12
+
+A cross-model evaluation of 0.2.0 found the approval policy stated three incompatible ways across
+four files, and several harness claims that were simply wrong. Both are fixed.
+
+### Changed
+- **One approval policy, stated once.** 0.2.0 said "approval for that specific thing" in
+  `SKILL.md`, allowed autonomous confirmations and a standing "just post the build updates"
+  setting in `sending.md`, and said "a post always asks" in `scenarios.md`. The rule is now:
+  nothing reaches another human until the member has seen the words and agreed, arriving either
+  as an approved draft or as content they dictated. **There is no standing approval for content**,
+  agents are told to decline it if asked, and `SKILL.md` is the only file that states the policy —
+  everything else points at it.
+- **Honest about what enforces it.** The server checks that a member granted permission to send at
+  all; it cannot check whether they approved a particular message. `SKILL.md`, `README.md` and
+  `SECURITY.md` now say so plainly instead of implying the approval step is a hard control.
+  Closing that gap server-side is tracked, not done.
+- **Tested and untested installs are structurally separated** — `install/` holds Claude Code;
+  `install/experimental/` holds OpenClaw and everything else.
+- Installs now clone a **released tag** rather than a moving branch.
+- The ten minutes is described accurately: about 600 words of briefing, with the rest of the ten
+  minutes belonging to the member's decisions. (0.2.0 called 800 words "ten minutes of reading",
+  which is roughly double the real rate.)
+
+### Added
+- Scenario 7: a member offers to stop reviewing posts, and the agent declines — the slow slide out
+  of rule 1.
+- An executable verification step: `h_sync_nest` carrying no taps changes nothing and proves the
+  server answers, the account is right, and the tool surface matches.
+- Failure rows for rate limiting (429) and duplicate delivery; an explicit note that **a sync is
+  partly a write** because it carries taps, and why retrying it is nonetheless safe.
+- Preflight for an existing clone and an existing same-named skill (0.2.0 checked only the plugin
+  and the MCP server); schedule removal in every uninstall; an uninstall step for generic installs.
+- An imperative-count check in `CONTRIBUTING.md`, and a note on parsing structured config rather
+  than appending text to it.
+
+### Fixed
+- `openclaw automations delete "<name>"` → `openclaw automations remove <jobId>`, with the id
+  stored at install so removal is possible later.
+- Cline is listed as having persistent scheduling (`cline schedule`); 0.2.0 said it had none, and
+  used that error to claim OpenClaw was the only harness that could run unattended.
+- The ChatGPT section no longer asserts a Plus/Pro read-only connector tier or an hourly task
+  ceiling — neither is established by OpenAI's own documentation. It now says what the docs do
+  say (full MCP connectors are Business/Enterprise/Edu, admin-enabled) and marks the rest unknown.
+- Claude Code OAuth tokens are described as going to the OS keychain **or a credentials file**,
+  which is what the docs actually say.
+- Removed the OpenClaw bootstrap-file size limits, which could not be confirmed against a
+  first-party page.
+- "No sender can derive" a filtering verdict softened to what the server actually does — the
+  original was an information-theoretic claim the product can't support.
+
 ## [0.2.0] — 2026-08-12
 
 The install was fiction in places; this release makes it real. Rebuilt after an adversarial
@@ -57,7 +108,7 @@ review (47 findings) plus verification against each harness's own documentation.
 - **The ChatGPT adapter's install path.** It described a universal Connectors flow, a scheduled
   daily loop, and "MCP added as a GPT action" — none of which hold up. ChatGPT is now documented
   as unsupported, with the specific entitlement and scheduling reasons, in
-  [`install/other-harnesses.md`](install/other-harnesses.md).
+  `install/other-harnesses.md` (moved to `install/experimental/` in 0.3.0).
 
 ### Fixed
 - The OpenClaw guide asked the installing agent to improvise. It now uses OpenClaw's real
@@ -72,5 +123,6 @@ review (47 findings) plus verification against each harness's own documentation.
 First version: the daily loop, filtering judgment, keeps, the briefing shape, send judgment under
 standing permission, profile care, and adapters for three harnesses.
 
+[0.3.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.0
 [0.2.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.2.0
 [0.1.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.1.0

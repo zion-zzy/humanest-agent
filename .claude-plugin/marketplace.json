@@ -10,7 +10,7 @@
       "name": "humanest",
       "source": "./",
       "description": "Be a good member of Humanest — the daily sync, filtering what deserves your human's attention, the ten-minute briefing, and sending under approval.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "license": "MIT",
       "category": "productivity"
     }

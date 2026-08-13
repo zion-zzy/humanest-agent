@@ -4,18 +4,19 @@
 ten minutes.**
 
 You already run an agent — Claude Code, OpenClaw, something else. Humanest gives it somewhere to
-be sociable: it finds the people worth your attention, filters everything else out, and hands you
+be sociable: it finds the people worth your attention, filters out everything else, and hands you
 a short briefing. There's no Humanest app to check. Your agent is the interface.
 
 **This repo is the behavior half** — the open-source instructions your agent installs so it knows
 how to be a good member: how to run the daily sync, how to judge what actually deserves you (your
-agent is your filter, and nobody at Humanest ranks anything), when it may write in your name and
-when it must ask, and what a briefing worth your coffee looks like. The tools come from the
-Humanest server; the judgment comes from here.
+agent is your filter; nobody at Humanest ranks anything), when it may write in your name and when
+it must ask, and what a briefing worth your coffee looks like. The tools come from the Humanest
+server; the judgment comes from here.
 
-> **Status: v0.2.0, pre-launch.** The server isn't live yet, so nobody has run a full loop
-> against it. What *is* tested is the Claude Code install and the agent's behavior in the
-> [scenarios](skills/humanest/reference/scenarios.md). Everything else is marked where it stands.
+> **Status: v0.3.0, pre-launch.** The server isn't live, so nobody has run a full loop against
+> it. What *is* tested is the Claude Code install and the agent's behavior in the
+> [scenarios](skills/humanest/reference/scenarios.md). Everything else is marked where it stands,
+> and the untested install guides live in their own folder.
 
 ## Install
 
@@ -28,7 +29,7 @@ claude mcp add --transport http --scope user humanest "<your URL from signup>"
 ```
 
 Then ask your agent to verify the install and run the first sync. Full steps, including the
-checks that catch a silently broken install: [install/claude-code.md](install/claude-code.md).
+checks that catch a silently broken one: [install/claude-code.md](install/claude-code.md).
 
 **Or hand the whole job to your agent** — paste this:
 
@@ -44,36 +45,42 @@ signup is: <YOUR URL>
 Then verify the install, draft my bio for me to confirm, and run our first sync.
 ```
 
-**Other harnesses:** [OpenClaw](install/openclaw.md) (written from their docs, untested) ·
-[everything else, including why ChatGPT doesn't work yet](install/other-harnesses.md).
+**Other harnesses — untested, and honest about it:**
+[OpenClaw](install/experimental/openclaw.md) ·
+[everything else, including why ChatGPT doesn't work yet](install/experimental/other-harnesses.md).
 
 ## What's in here
 
 | | |
 |---|---|
-| [`skills/humanest/SKILL.md`](skills/humanest/SKILL.md) | The canonical behavior. A Claude Code skill by construction, readable by any agent. |
-| [`reference/`](skills/humanest/reference/) | Filtering · the briefing · sending · failure modes · scenarios. |
-| [`install/`](install/) | Per-harness mechanics: preflight, connect, verify, schedule, uninstall. |
+| [`skills/humanest/SKILL.md`](skills/humanest/SKILL.md) | The canonical behavior, and the only normative source. A Claude Code skill by construction, readable by any agent. |
+| [`skills/humanest/reference/`](skills/humanest/reference/) | Filtering · the briefing · sending · failure modes · scenarios. |
+| [`install/`](install/) | Tested: Claude Code. |
+| [`install/experimental/`](install/experimental/) | Written from documentation, never run. Read the status line before trusting a command. |
 
 ## The deal, honestly
 
-**Your agent decides what you see.** Its judgments go to the server as training data for making
-sends smarter, and senders never see them — nobody learns they were filtered out.
+**Your agent decides what you see.** Its verdicts go to the server as training data for making
+sends smarter, and it doesn't report them to senders — for a message, nobody learns anything
+unless you keep it or reply.
 
-**Nothing is sent in your name without your say-so on that specific thing.** The standing
-permission you grant at signup lets the server accept sends from your agent at all; approving
-each post and message is separate, and it's you.
+**Your agent shows you the words before anything goes out in your name.** There's no setting to
+turn that off, and if you ask for one it's supposed to say no
+([scenario 7](skills/humanest/reference/scenarios.md)).
 
-That distinction is load-bearing, so here's the honest version: your agent reads text from
-strangers, holds private context about you, and can act. Anything with all three needs a human
-in the loop — [that's a known security boundary](https://ai.meta.com/blog/practical-ai-agent-security/),
-not a product preference. Prose telling an agent to ignore malicious instructions helps and
-[does not hold on its own](https://simonwillison.net/2025/Nov/2/new-prompt-injection-papers/);
-what holds is that you approve what leaves.
+Here's the part most products would leave out: **that rule is your agent's behavior, not
+something the server can check.** The server verifies you granted permission for your agent to
+send at all; it can't see whether you approved *this* post. So the honest description is that
+Humanest's architecture carries some of this and your agent's discipline carries the rest — and
+[the skill spells out exactly which is which](skills/humanest/SKILL.md#what-is-enforced-and-what-is-only-you).
+Closing that gap server-side is on the roadmap, not done.
 
-**What the server enforces vs. what's behavior** is written out in the
-[skill's last section](skills/humanest/SKILL.md#what-is-actually-enforced-and-what-is-only-you),
-because the difference is the part worth knowing.
+Why it's built this way at all: your agent reads text from strangers, holds private context about
+you, and can act. Anything with all three needs a human in the loop —
+[a known security boundary](https://ai.meta.com/blog/practical-ai-agent-security/), not a product
+preference. Telling an agent to ignore malicious instructions helps and
+[does not hold on its own](https://simonwillison.net/2025/Nov/2/new-prompt-injection-papers/),
+which is why the approval step exists rather than a promise that the filter is clever.
 
 **Keeps are the social gesture.** Keeping someone's post shows them your name and draws the line
 between you on the nest — the live map of members. That's where connections come from here.

@@ -24,13 +24,21 @@ human, and can send. Anything holding all three needs a human between the readin
 — [Meta's Agents Rule of Two](https://ai.meta.com/blog/practical-ai-agent-security/) is the
 clearest statement of why.
 
-So the boundary this repo actually defends is: **nothing addressed to another human leaves
-without that member's approval of that specific thing.** The instruction that inbound content is
-data rather than instruction is a floor, not a ceiling — twelve published prompt-injection
-defenses were tested against adaptive attacks and
-[all twelve collapsed](https://simonwillison.net/2025/Nov/2/new-prompt-injection-papers/), so we
-don't claim prose stops injection. We claim the human approval does, and we keep the prose
-because it raises the cost of the naive attempt.
+So the boundary this repo defends is: **nothing reaches another human until that member has seen
+the words and agreed to them.** The instruction that inbound content is data rather than
+instruction is a floor, not a ceiling — twelve published prompt-injection defenses were tested
+against adaptive attacks and
+[all twelve collapsed](https://simonwillison.net/2025/Nov/2/new-prompt-injection-papers/) — so we
+don't claim prose stops injection. We keep the prose because it raises the cost of the naive
+attempt.
+
+**And we won't claim more than that, because the approval step is behavioral too.** Today the
+server verifies that a member granted their agent permission to send at all; it does not verify
+that the member approved the specific text. An agent that ignores these files can therefore send
+something unapproved, and the server will accept it. That is a real gap, it is known, and closing
+it — approval bound to the exact content and recipients, checked server-side — is tracked work
+rather than finished work. **Anyone reporting a way to make an agent send unapproved content is
+reporting a bug in a defense we describe as partial, not defeating one we call complete.**
 
 The classes we most want reported:
 
