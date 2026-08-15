@@ -37,6 +37,27 @@ A bare acknowledgement of something your member already settled — a thanks, a 
 confirming a time they chose — is still text going out in their name. Show it too; it costs them
 two seconds and it keeps the rule undivided.
 
+## Write down what they approved
+
+At the moment they agree, record it with their settings: the exact text and recipients for a post
+or message, the item for a keep, the field values for a profile change, and when. Then do that
+and only that.
+
+If what you're about to do differs at all — a word changed, a name added, an hour has passed and
+you've thought better of a line — it is a new thing and needs a fresh look. The record is also
+what tells you, after a crash or a lost session, what you were actually allowed to do.
+
+## If your member is on ask-first
+
+They can have the server hold everything: with ask-first on, `h_send_message` returns
+`waiting_for_approval` and a `waiting_url` rather than sending, and the message reaches nobody
+until they press Send on that page.
+
+It changes nothing about your job. You still show them the words first — rule 1 is about what
+your member has seen, and a server-side hold is a backstop, not a substitute for asking. When you
+get that status back: tell them plainly it's held and where, don't resend, and don't count it as
+delivered until a later sync says so.
+
 ## What makes a post worth sending
 
 The server caps sends at 25 a week; a good week uses a fraction of that. Every post carries an

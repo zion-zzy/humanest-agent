@@ -10,6 +10,45 @@ pre-launch and its tool names are not frozen. **The server's own tool descriptio
 authoritative**; where they disagree with this repo, follow the tools and open an issue. A tool
 rename in the server is a MINOR bump here.
 
+## [0.4.0] — 2026-08-14
+
+The server shipped and this repo had drifted from it. A whole-product walk by another session
+found eight mismatches; seven are fixed here, one is a factual question left open.
+
+### Fixed
+- **The install named the wrong server.** Every guide said `humanest`; the product's own join
+  page says `nest`. A member following both ended up with two MCP entries pointing at the same
+  server and a duplicated tool set — and the collision preflight, the troubleshooting, and the
+  uninstall line all checked a name nobody has. The OpenClaw command shape was wrong too
+  (`mcp add --url --transport` vs the product's `mcp set … && mcp login`).
+- **The address is no longer described as a per-member secret.** One fixed public URL replaced
+  the per-signup one on 2026-08-13; four files still told the installing agent to guard it, avoid
+  writing it to config, and rotate it from settings. There is nothing to rotate. What identifies
+  a member is the OAuth token, and that is what the guides now protect.
+- **The profile section understated what's public by two fields.** It said the bio is public and
+  the rest is shown to nobody; `name` and `links` are public too. In a repo whose selling point
+  is honesty about privacy, that mattered.
+- **The private field names didn't match the schema**, so an agent following them literally would
+  fail validation: `now` is what they're working on, `ask` is what they want.
+- **Two behaviors waited on signals the server never sends.** `profile_stale` and
+  `version_notice` are declared in the contracts and constructed nowhere, and one of them was the
+  only way an installed copy could learn a newer version exists. The agent now notices staleness
+  itself and checks the releases page on its own schedule.
+
+### Changed
+- **Keeps belong to the member** (2026-08-13(c).1): the agent's judgment is the verdict — passed
+  or held — and nothing else. It files a keep only on an explicit say-so, and never describes its
+  filter passing something as having "kept" it. New scenario 8 covers the overwhelming case.
+- **Ask-first sending is documented.** It shipped 2026-08-14 and appeared nowhere here: on that
+  mode a send returns `waiting_for_approval` with a `waiting_url` and reaches nobody until the
+  member presses Send. The README's "closing that gap server-side is on the roadmap, not done" is
+  now the truth — it exists, opt-in and off by default.
+- Profile detail moved to `reference/profile.md`, keeping the canonical file under its ceiling.
+
+### Open
+- **ChatGPT.** This repo says it can't work; the product's join flow ships Developer Mode steps
+  for it. One of the two is wrong and it is a question of fact, not wording. Filed as `hn-wdyf`.
+
 ## [0.3.2] — 2026-08-13
 
 A fourth independent scoring pass caught three of my own mistakes and one hole worth more than
@@ -179,6 +218,7 @@ review (47 findings) plus verification against each harness's own documentation.
 First version: the daily loop, filtering judgment, keeps, the briefing shape, send judgment under
 standing permission, profile care, and adapters for three harnesses.
 
+[0.4.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.4.0
 [0.3.2]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.2
 [0.3.1]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.1
 [0.3.0]: https://github.com/zion-zzy/humanest-agent/releases/tag/humanest--v0.3.0

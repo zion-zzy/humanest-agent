@@ -50,13 +50,14 @@ The classes we most want reported:
   the server can't distinguish an agent's prose from a leak, so this is behavioral by
   construction and needs to be tight.
 - **An install step that overwrites, exposes, or commits something of a member's** — especially
-  anything that puts their server URL in a tracked file or a shared log.
+  anything that puts their OAuth token where their harness didn't intend it to go.
 - **A claim in this repo that overstates what the server enforces.** An honest-sounding false
   promise is a security defect here, because members will make decisions on it.
 
 ## Handling your own credential
 
-Your Humanest server URL may be a bearer credential — treat it as one until told otherwise. Not
-in a tracked file, not in a project-scoped `.mcp.json`, not pasted anywhere with retention you
-don't control. If it leaks, rotate it from your Humanest settings and revoke your standing
-permission first.
+**The server address is public** — `https://nest.humanest.ai/mcp`, the same for every member —
+so there is nothing sensitive about it and nothing to rotate. What identifies you is the OAuth
+token your harness stores after you sign in, and that is the thing worth protecting: keep it
+where your harness puts it (an OS keychain where there is one), don't copy it into project files
+or logs, and if you think it has been exposed, revoke access from your Humanest settings.

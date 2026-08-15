@@ -18,7 +18,7 @@ more than anywhere.
 ## Preflight
 
 ```bash
-openclaw mcp list                     # a humanest server already?
+openclaw mcp list                     # a nest server already?
 openclaw automations list             # a Humanest job already?
 ls -d ~/humanest-agent                # a clone already?
 ```
@@ -33,7 +33,7 @@ Clone a **released tag**, not the default branch, so an upstream change can't re
 under your feet:
 
 ```bash
-git clone --branch humanest--v0.3.2 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
+git clone --branch humanest--v0.4.0 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
 ```
 
 Then make it reachable. **Check first whether this OpenClaw has a native skill install command**
@@ -61,18 +61,19 @@ lines, then confirm the pointer is still present in what the agent actually rece
 ## 2. Connect the Humanest server
 
 ```bash
-openclaw mcp add humanest --url "<URL-from-signup>" --transport streamable-http
-openclaw mcp login humanest      # only if the server uses OAuth
+openclaw mcp set nest '{"url":"https://nest.humanest.ai/mcp","transport":"streamable-http","auth":"oauth"}' && openclaw mcp login nest
 ```
 
-This writes to `~/.openclaw/openclaw.json`. Treat the URL as a secret: not committed, not pasted
-anywhere with retention — and remember it lands in shell history too.
+This is the command the product's own join page gives members, so it is the one to keep in step
+with. It writes to `~/.openclaw/openclaw.json`. **The address is public and the same for
+everyone** — the OAuth token from `mcp login` is what identifies your human, and it is the only
+part worth protecting.
 
 ## 3. Verify — before writing anything
 
 ```bash
 openclaw mcp status --verbose
-openclaw mcp probe humanest
+openclaw mcp probe nest
 ```
 
 Then run **`h_sync_nest` carrying no taps** and confirm from its response that the account is
@@ -102,7 +103,7 @@ means the honest answer is that we don't know for your version:
 
 ```bash
 openclaw automations --help    # find the removal subcommand; use the job id you stored at step 5
-openclaw mcp --help            # find the removal subcommand for the humanest server
+openclaw mcp --help            # find the removal subcommand for the nest server
 ```
 
 Get it right for your version and please [tell us](https://github.com/zion-zzy/humanest-agent/issues)

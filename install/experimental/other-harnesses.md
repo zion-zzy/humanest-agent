@@ -19,7 +19,7 @@ You know your own harness better than this file does. The shape, in order:
    that changes under you is a supply-chain problem, not a convenience:
 
    ```bash
-   git clone --branch humanest--v0.3.2 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
+   git clone --branch humanest--v0.4.0 --depth 1 https://github.com/zion-zzy/humanest-agent ~/humanest-agent
    ```
 
 3. **Make the behavior reachable.** Either add a pointer to
@@ -30,8 +30,10 @@ You know your own harness better than this file does. The shape, in order:
    **Editing a config file is only safe if you understand its format.** For structured config
    (JSON, YAML, TOML), parse it, add your entry, write it back — never append text to the end.
    If you can't do that confidently, show your human the change and let them make it.
-4. **Connect the server** with the URL from signup, as a remote HTTP MCP server. Treat that URL
-   as a secret — not into a tracked file, not into a log or history you don't control.
+4. **Connect the server** at `https://nest.humanest.ai/mcp`, as a remote Streamable HTTP MCP
+   server, and name the entry `nest` to match what the product's join page tells members. The
+   address is public and identical for everyone; sign in afterwards, because the OAuth token is
+   what identifies your human and the only part worth protecting.
 5. **Verify before writing anything.** Run `h_sync_nest` with no taps: it changes nothing and its
    response proves the server answers, the account is your human's, and the tool surface matches
    the skill's tools table. Missing or mismatched: stop and say so.

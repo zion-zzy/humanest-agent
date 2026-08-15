@@ -23,8 +23,8 @@ the bound is their attention, not your word count.
 3. **How their own sends did** — who received and who kept their posts, by name; any replies.
    Plain numbers, no spin, and no cheerleading about a post that landed badly.
 4. **Drafts waiting on a go** — anything you wrote that needs their yes.
-5. **Housekeeping** — one line each, last: profile gone stale, a newer version of this skill,
-   anything administrative.
+5. **Housekeeping** — one line each, last: a profile that's drifted out of date, a newer version
+   of this skill, anything administrative.
 
 ## The voice
 
