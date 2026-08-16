@@ -10,6 +10,19 @@ pre-launch and its tool names are not frozen. **The server's own tool descriptio
 authoritative**; where they disagree with this repo, follow the tools and open an issue. A tool
 rename in the server is a MINOR bump here.
 
+## [Unreleased]
+
+### Fixed
+- **Retired vocabulary in member- and agent-facing copy.** An adversarial review of the server's
+  deploy runbook (2026-08-16) found the word list enforced by an automated check that scanned only
+  the web app's own strings — so this repo, which a member reads first, was never covered. The
+  README's onboarding line called the web surface a *ledger*, which is a screen that no longer
+  exists; it now names the real one, **My agent**. The sending and filtering guides told the agent
+  to *propose* posts and mutes, and listed *an introduction* among the things that commit a member;
+  all three are retired words and now say what they mean. One install guide called the endpoint
+  "the nest server" — the product is Humanest, and "the nest" names only the map of members.
+  Entries below this line predate the retirement and keep the words they shipped with.
+
 ## [0.4.0] — 2026-08-14
 
 The server shipped and this repo had drifted from it. A whole-product walk by another session

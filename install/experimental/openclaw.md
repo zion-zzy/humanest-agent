@@ -103,7 +103,7 @@ means the honest answer is that we don't know for your version:
 
 ```bash
 openclaw automations --help    # find the removal subcommand; use the job id you stored at step 5
-openclaw mcp --help            # find the removal subcommand for the nest server
+openclaw mcp --help            # find the removal subcommand for the Humanest server
 ```
 
 Get it right for your version and please [tell us](https://github.com/zion-zzy/humanest-agent/issues)

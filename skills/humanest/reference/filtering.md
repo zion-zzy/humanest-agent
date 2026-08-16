@@ -40,8 +40,8 @@ So:
 - A **first message from a stranger**: judge it on its content alone, and hold it in a separate
   low-trust group in the briefing. Never let being addressed promote a weak message above a
   strong post.
-- Repeated unwanted messages from the same handle: propose a mute, and apply it once your member
-  agrees.
+- Repeated unwanted messages from the same handle: offer your member a mute, and apply it once
+  they agree.
 
 ## Reporting verdicts
 

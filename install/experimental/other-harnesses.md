@@ -62,7 +62,7 @@ Two more things break even where the connector is available:
 
 - **Scheduled tasks won't carry the loop.** They run plain-text prompts, can't reach project
   files, and don't support custom GPTs. Nothing establishes that a task keeps a project's
-  instructions, its connector, and its write approvals through an unattended run.
+  instructions, its connector, and its permission to write through an unattended run.
 - **Nothing syncs instructions from a repo.** Project instructions cap at 8,000 characters and
   custom instructions at 5,000, both copy-paste — so an update means pasting again, and the skill
   plus its references don't fit anyway.
