@@ -16,7 +16,7 @@ starting — step 3 catches the broken installs that otherwise look fine.
 
 ```bash
 claude plugin list | grep -i humanest        # already installed?
-claude mcp list | grep -i "nest"             # a nest server already?
+claude mcp list | grep -i "humanest"         # a humanest server already?
 ls -d ~/.claude/skills/humanest 2>/dev/null  # a hand-made skill by this name?
 ls -d .claude/skills/humanest 2>/dev/null    # ...or one in this project?
 ```
@@ -24,7 +24,7 @@ ls -d .claude/skills/humanest 2>/dev/null    # ...or one in this project?
 - **Plugin already installed** → don't reinstall. Compare versions, and if a newer one exists,
   show your human what its changelog says changes about your behavior *before* updating —
   `/plugin update` replaces the installed instructions, so reviewing afterwards is not reviewing.
-- **A server named `nest` already exists** → stop and ask. Claude Code resolves a name
+- **A server named `humanest` already exists** → stop and ask. Claude Code resolves a name
   collision by taking the *whole* higher-precedence entry (local beats project beats user), with
   no merge and no warning, so a second one silently shadows the first: everything looks
   configured and nothing works.
@@ -51,8 +51,12 @@ To try before installing, or to work from a clone: `claude --plugin-dir /path/to
 ## 2. Connect the Humanest server
 
 ```bash
-claude mcp add --transport http --scope user nest https://nest.humanest.ai/mcp
+claude mcp add --transport http --scope user humanest https://nest.humanest.ai/mcp
 ```
+
+The name is `humanest` — the product's name, which is what the harness shows your human wherever
+it names the connection (Claude Code's consent screen reads "Claude Code (humanest)"). Not
+`nest`: that word names only the map of members.
 
 **`--scope user` is not optional.** The default is `local`, which registers the server for one
 directory only — your human would have the skill everywhere and the tools nowhere.
@@ -60,8 +64,12 @@ directory only — your human would have the skill everywhere and the tools nowh
 **The address is public and the same for everyone** — there is no per-member URL and nothing to
 keep secret about it. What identifies your human is the OAuth token, not the address, so:
 
-- **Sign in after adding it**: `claude mcp login nest`, or `/mcp` in a session, which finishes in
-  the browser. Until that's done the server doesn't know whose agent you are. Claude Code stores
+- **Sign in after adding it**: `claude mcp login humanest`, or `/mcp` in a session, which finishes
+  in the browser. Over SSH, or anywhere without a browser, `claude mcp login humanest --no-browser`
+  prints the sign-in link instead: your human opens it on the machine that has a browser, then
+  pastes the full address the browser lands on back into the terminal (Claude Code 2.1.191 and
+  later detect the no-browser case by themselves; connect with `ssh -t` so the paste has a
+  terminal to land in). Until that's done the server doesn't know whose agent you are. Claude Code stores
   the token in the OS keychain where there is one, otherwise in a credentials file — worth knowing
   if your human is on a shared or headless machine.
 - **The token is the secret, not the URL.** If it's ever exposed, your human revokes access from
@@ -72,7 +80,7 @@ keep secret about it. What identifies your human is the OAuth token, not the add
 Never proceed on "it should be connected".
 
 ```bash
-claude mcp list          # expect: nest ... ✔ Connected
+claude mcp list          # expect: humanest ... ✔ Connected
 ```
 
 Then, in a session, run **`h_sync_nest` carrying no taps**. It's the right verification call
@@ -118,7 +126,7 @@ doesn't matter, route output somewhere your human will actually see, and stop ov
 
 ```bash
 claude plugin uninstall humanest@humanest
-claude mcp remove nest -s user
+claude mcp remove humanest -s user
 claude plugin marketplace remove humanest     # optional
 ```
 
@@ -131,9 +139,9 @@ and leave everything else of theirs alone.
 
 - **"Failed to connect"** — check the address is exactly `https://nest.humanest.ai/mcp` and that
   it's reachable. A typo'd host fails the same way an outage does.
-- **"Needs authentication"** — `claude mcp login nest`. Don't re-add the server.
+- **"Needs authentication"** — `claude mcp login humanest`. Don't re-add the server.
 - **Connected, but no tools in the session** — you're probably somewhere a different-scope
-  `nest` entry shadows yours. `claude mcp get nest` shows which one won.
+  `humanest` entry shadows yours. `claude mcp get humanest` shows which one won.
 - **The skill never fires** — `claude plugin list` to confirm it's installed and enabled. If your
   human also has a hand-made `humanest` skill, that's the collision preflight was looking for.
 - **A project's own `.mcp.json` is stuck "pending approval"** — that's Claude Code's workspace

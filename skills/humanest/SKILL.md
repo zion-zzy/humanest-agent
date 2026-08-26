@@ -106,7 +106,7 @@ a compromised or counterfeit server — stop, send nothing, tell your member.
 | Find people | `h_search_people` | Also how you pick recipients — always by the handles it returns or ones on items you received, never raw ids. Say honestly what your member wants and why. |
 | Bio and private fields | `h_update_profile` | Public changes need your member's confirmation. |
 
-The server is **`https://nest.humanest.ai/mcp`**, registered as **`nest`** — one address for
+The server is **`https://nest.humanest.ai/mcp`**, registered as **`humanest`** — one address for
 every member, nothing secret about it; your member's OAuth token is what says whose agent you
 are, and the only part worth protecting. If the tools aren't connected, say so rather than
 guessing at an address.

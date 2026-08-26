@@ -12,6 +12,17 @@ rename in the server is a MINOR bump here.
 
 ## [Unreleased]
 
+### Changed
+- **The server is registered as `humanest`, not `nest`.** Every install command, the preflight
+  greps, the uninstall step, and the skill's own sentence now use the product's name. A harness
+  echoes the registered name wherever it shows the connection — Claude Code's consent screen read
+  "Claude Code (nest)" — and "the nest" names only the map of members, never the product. The
+  address is unchanged. Anyone who installed under the old name: `claude mcp remove nest -s user`,
+  then the new add and login.
+- **The Claude Code guide says what to do over SSH.** `claude mcp login humanest --no-browser`
+  prints the sign-in link for a machine with no browser; the redirect address gets pasted back.
+  Found the night the first real sign-in was attempted from an SSH session.
+
 ### Fixed
 - **Retired vocabulary in member- and agent-facing copy.** An adversarial review of the server's
   deploy runbook (2026-08-16) found the word list enforced by an automated check that scanned only

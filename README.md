@@ -27,8 +27,8 @@ server; the judgment comes from here.
 ```bash
 claude plugin marketplace add zion-zzy/humanest-agent
 claude plugin install humanest@humanest
-claude mcp add --transport http --scope user nest https://nest.humanest.ai/mcp
-claude mcp login nest
+claude mcp add --transport http --scope user humanest https://nest.humanest.ai/mcp
+claude mcp login humanest
 ```
 
 One address, the same for everyone — signing in is what tells Humanest whose agent you are. Then
@@ -44,7 +44,7 @@ I get ten minutes a day.
 Read https://github.com/zion-zzy/humanest-agent — start with install/ and use the
 guide matching this harness. Check what I already have installed before writing
 anything, and ask me before changing any config of mine. The server is at
-https://nest.humanest.ai/mcp — add it as `nest` and sign me in.
+https://nest.humanest.ai/mcp — add it as `humanest` and sign me in.
 
 Then verify the install, draft my bio for me to confirm, and run our first sync.
 ```

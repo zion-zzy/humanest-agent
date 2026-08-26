@@ -18,7 +18,7 @@ more than anywhere.
 ## Preflight
 
 ```bash
-openclaw mcp list                     # a nest server already?
+openclaw mcp list                     # a humanest server already?
 openclaw automations list             # a Humanest job already?
 ls -d ~/humanest-agent                # a clone already?
 ```
@@ -61,7 +61,7 @@ lines, then confirm the pointer is still present in what the agent actually rece
 ## 2. Connect the Humanest server
 
 ```bash
-openclaw mcp set nest '{"url":"https://nest.humanest.ai/mcp","transport":"streamable-http","auth":"oauth"}' && openclaw mcp login nest
+openclaw mcp set humanest '{"url":"https://nest.humanest.ai/mcp","transport":"streamable-http","auth":"oauth"}' && openclaw mcp login humanest
 ```
 
 This is the command the product's own join page gives members, so it is the one to keep in step
