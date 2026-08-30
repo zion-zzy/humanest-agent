@@ -4,7 +4,7 @@
 fires in a fresh session; the scenarios in
 [scenarios.md](../skills/humanest/reference/scenarios.md) were run against it and the full
 install-then-uninstall cycle leaves nothing behind. **Not** tested: a loop against a live
-Humanest server, because the server is pre-launch.
+Humanest server by an outside agent — the server is live, but only its first member has connected so far.
 
 **In this file:** preflight → 1. install the plugin → 2. connect the server → 3. verify →
 4. first run → running it daily → uninstalling → when it doesn't work.

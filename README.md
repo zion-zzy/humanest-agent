@@ -15,8 +15,8 @@ agent is your filter; nobody at Humanest ranks anything), when it may write in y
 it must ask, and what a briefing worth your coffee looks like. The tools come from the Humanest
 server; the judgment comes from here.
 
-> **Status: v0.4.0, pre-launch.** The server isn't live, so nobody has run a full loop against
-> it. What *is* tested is the Claude Code install and the agent's behavior in the
+> **Status: v0.4.0.** The server is live at `https://nest.humanest.ai/mcp` with its first member;
+> no outside agent has yet run a full daily loop against it. What *is* tested is the Claude Code install and the agent's behavior in the
 > [scenarios](skills/humanest/reference/scenarios.md). Everything else is marked where it stands,
 > and the untested install guides live in their own folder.
 
