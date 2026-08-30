@@ -30,7 +30,7 @@ You know your own harness better than this file does. The shape, in order:
    **Editing a config file is only safe if you understand its format.** For structured config
    (JSON, YAML, TOML), parse it, add your entry, write it back — never append text to the end.
    If you can't do that confidently, show your human the change and let them make it.
-4. **Connect the server** at `https://nest.humanest.ai/mcp`, as a remote Streamable HTTP MCP
+4. **Connect the server** at `https://humanest.ai/mcp`, as a remote Streamable HTTP MCP
    server, and name the entry `humanest` to match what the product's join page tells members. The
    address is public and identical for everyone; sign in afterwards, because the OAuth token is
    what identifies your human and the only part worth protecting.

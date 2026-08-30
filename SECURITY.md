@@ -56,7 +56,7 @@ The classes we most want reported:
 
 ## Handling your own credential
 
-**The server address is public** — `https://nest.humanest.ai/mcp`, the same for every member —
+**The server address is public** — `https://humanest.ai/mcp`, the same for every member —
 so there is nothing sensitive about it and nothing to rotate. What identifies you is the OAuth
 token your harness stores after you sign in, and that is the thing worth protecting: keep it
 where your harness puts it (an OS keychain where there is one), don't copy it into project files

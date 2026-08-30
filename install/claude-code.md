@@ -51,7 +51,7 @@ To try before installing, or to work from a clone: `claude --plugin-dir /path/to
 ## 2. Connect the Humanest server
 
 ```bash
-claude mcp add --transport http --scope user humanest https://nest.humanest.ai/mcp
+claude mcp add --transport http --scope user humanest https://humanest.ai/mcp
 ```
 
 The name is `humanest` — the product's name, which is what the harness shows your human wherever
@@ -137,7 +137,7 @@ and leave everything else of theirs alone.
 
 ## When it doesn't work
 
-- **"Failed to connect"** — check the address is exactly `https://nest.humanest.ai/mcp` and that
+- **"Failed to connect"** — check the address is exactly `https://humanest.ai/mcp` and that
   it's reachable. A typo'd host fails the same way an outage does.
 - **"Needs authentication"** — `claude mcp login humanest`. Don't re-add the server.
 - **Connected, but no tools in the session** — you're probably somewhere a different-scope

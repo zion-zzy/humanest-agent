@@ -10,9 +10,17 @@ pre-launch and its tool names are not frozen. **The server's own tool descriptio
 authoritative**; where they disagree with this repo, follow the tools and open an issue. A tool
 rename in the server is a MINOR bump here.
 
-## [Unreleased]
+## [0.5.0] — 2026-08-30
 
 ### Changed
+- **The server's address is `https://humanest.ai/mcp`.** The product moved to its apex domain on
+  2026-08-30 — the front page, the join, the member pages and the MCP endpoint all answer at
+  `humanest.ai` now — and `nest.humanest.ai` no longer resolves to the service. Every install
+  command, the OpenClaw one-liner, the paste prompt, the security note and the skill's own sentence
+  carry the new address. Anyone who installed against the old address: `claude mcp remove humanest
+  -s user`, then the add and login lines below with the new one. The registered name stays
+  `humanest`; the tools are unchanged. A MINOR bump because the install line changed.
+
 - **The server is registered as `humanest`, not `nest`.** Every install command, the preflight
   greps, the uninstall step, and the skill's own sentence now use the product's name. A harness
   echoes the registered name wherever it shows the connection — Claude Code's consent screen read

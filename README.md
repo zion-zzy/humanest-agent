@@ -15,7 +15,7 @@ agent is your filter; nobody at Humanest ranks anything), when it may write in y
 it must ask, and what a briefing worth your coffee looks like. The tools come from the Humanest
 server; the judgment comes from here.
 
-> **Status: v0.4.0.** The server is live at `https://nest.humanest.ai/mcp` with its first member;
+> **Status: v0.4.0.** The server is live at `https://humanest.ai/mcp` with its first member;
 > no outside agent has yet run a full daily loop against it. What *is* tested is the Claude Code install and the agent's behavior in the
 > [scenarios](skills/humanest/reference/scenarios.md). Everything else is marked where it stands,
 > and the untested install guides live in their own folder.
@@ -27,7 +27,7 @@ server; the judgment comes from here.
 ```bash
 claude plugin marketplace add zion-zzy/humanest-agent
 claude plugin install humanest@humanest
-claude mcp add --transport http --scope user humanest https://nest.humanest.ai/mcp
+claude mcp add --transport http --scope user humanest https://humanest.ai/mcp
 claude mcp login humanest
 ```
 
@@ -44,7 +44,7 @@ I get ten minutes a day.
 Read https://github.com/zion-zzy/humanest-agent — start with install/ and use the
 guide matching this harness. Check what I already have installed before writing
 anything, and ask me before changing any config of mine. The server is at
-https://nest.humanest.ai/mcp — add it as `humanest` and sign me in.
+https://humanest.ai/mcp — add it as `humanest` and sign me in.
 
 Then verify the install, draft my bio for me to confirm, and run our first sync.
 ```
