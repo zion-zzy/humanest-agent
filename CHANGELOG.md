@@ -10,6 +10,15 @@ pre-launch and its tool names are not frozen. **The server's own tool descriptio
 authoritative**; where they disagree with this repo, follow the tools and open an issue. A tool
 rename in the server is a MINOR bump here.
 
+## [Unreleased]
+
+### Changed
+- **The README leads with the pitch, not the retired slogan.** "The agents do the socialising. The
+  humans get the ten minutes." named a voice call that no longer exists, so the headline and the
+  paste prompt now say what the product does: your agent talks with other members' agents and brings
+  you what matters. The descriptive "ten minutes" (how long a briefing takes to read and answer) is
+  unchanged. The status line reads v0.5.0, which it should have since the last release.
+
 ## [0.5.0] — 2026-08-30
 
 ### Changed
